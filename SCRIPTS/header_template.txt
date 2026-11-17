@@ -1,0 +1,28 @@
+#!/bin/bash
+
+####################################################
+### AGNoStep  -  Apps Manager
+### (c) 2026 Patrick Cardona
+###
+### Thanks for the GNUstep Developers Community
+### This is Free and Open Source software.
+### Read License in the root directory.
+####################################################
+
+################################
+### Main script: agnostep.sh
+################################
+
+### VARS
+################################
+
+### Include functions
+################################
+. SCRIPTS/colors
+
+################################
+### Splash screen
+. SCRIPTS/splash.sh
+
+STR="Agnostep Manager is starting..."
+titulo
