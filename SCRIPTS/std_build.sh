@@ -15,7 +15,6 @@
 
 function _build()
 {
-. AGNOSTEP.conf
 DEBUG=${DEBUG:-NO}
 SYSTOOLS=$(gnustep-config --variable=GNUSTEP_SYSTEM_TOOLS)
 if [ -z "$SYSTOOLS" ];then
