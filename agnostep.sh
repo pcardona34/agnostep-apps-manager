@@ -17,6 +17,10 @@
 ################################
 FICHTEMP=$(mktemp /tmp/agno-XXXXX)
 trap "rm -f $FICHTEMP" EXIT
+MENU=$(mktemp /tmp/agno-XXXXX)
+trap "rm -f $MENU" EXIT
+APPMENU=$(mktemp /tmp/agno-XXXXX)
+trap "rm -f $APPMENU" EXIT
 
 ### Include functions
 ################################
@@ -25,6 +29,7 @@ trap "rm -f $FICHTEMP" EXIT
 . SCRIPTS/colors.sh
 . MODULES.ini
 . SCRIPTS/fetcher.sh
+. SCRIPTS/functions_prep.sh
 . SCRIPTS/functions_remove_app.sh
 . SCRIPTS/functions_main.sh
 
@@ -39,6 +44,12 @@ titulo
 ################################
 reset_log
 
+################################
+### Check env and system
+sanity_check
+
+
+################################
 ### Building dynamic menu
 main_menu_header
 
@@ -55,20 +66,11 @@ do
         echo -e "Module ${MOD} is disabled.\n"
     fi
 done
-    add_category "None"
 sleep 2
 popd >/dev/null
 main_menu_foot
 
-#cat ./dynamic_menu.sh
-#cat ./dynamic_menu.sh | grep "on "
-#if [ $? -ne 0 ];then
-#    cat ./dynamic_menu.sh | sed -e 's/off/on/' >> TEMP_MENU
-#    cat TEMP_MENU
-#    mv TEMP_MENU > ./dynamic_menu.sh
-#fi
-
-. ./dynamic_menu.sh || exit 1
+. $MENU || exit 1
 main_menu
 
 if [ $? -eq 0 ];then
@@ -77,7 +79,7 @@ if [ $? -eq 0 ];then
     app_menu_header "$REP"
     list_apps "$REP"
     app_menu_foot
-    . ./dynamic_app_menu.sh || exit 1
+    . $APPMENU || exit 1
     main_app_menu
     if [ $? -eq 0 ];then
         APP=$(cat $FICHTEMP)
@@ -112,12 +114,12 @@ if [ $? -eq 0 ];then
             if [ -f install.sh ];then
                 . ./install.sh
             else
-                echo "No builtin install Script. Case Not yet implemented...\n"
+                alert "No builtin install Script."
             fi
             popd >/dev/null
 
         else
-            echo "Installation aborted."
+            warning "Installation aborted."
         fi
         popd >/dev/null
     fi

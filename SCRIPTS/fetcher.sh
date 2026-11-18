@@ -46,12 +46,12 @@ fi
 function clone
 {
     URL=${HUB}/${OWNER}/${REPO}
-    pushd . >/dev/null
     if [ -d ${REPO} ];then
+        pushd . >/dev/null
         cd ${REPO} && git pull
+        popd . >/dev/null
     else
         git clone ${URL}.git
-        cd ${REPO} || exit 1
     fi
 }
 

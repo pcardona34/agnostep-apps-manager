@@ -1,7 +1,8 @@
 #!/bin/bash
 
 ####################################################
-### A G N o S t e p  -  Desktop - by Patrick Cardona
+### AGNoStep  -  Apps Manager
+### (c) 2026 Patrick Cardona
 ### pcardona34 @ Github
 ###
 ### Thanks for the GNUstep Developers Community
@@ -10,7 +11,7 @@
 ####################################################
 
 ################################
-### Functions for 1_prep.sh
+### Functions for deps management...
 ################################
 
 #############################################
@@ -27,7 +28,7 @@ MSG="On $ID - $DEBIAN_VERSION_FULL - ${ARCHI}\nYou are welcome!\n\n"
 if [ "$ID" == "$REQUIRED_OS" ] && [ "$VERSION_ID" == "$REQUIRED_RELEASE" ];then
 	info "$MSG"
 else
-	alert "A G N o S t e p  Desktop should not be installed without $REQUIRED_OS ${REQUIRED_RELEASE}.\nAborting!\n"
+	alert "AGNoStep Apps Manager should not run without $REQUIRED_OS ${REQUIRED_RELEASE}.\nAborting!\n"
 	exit 1
 fi
 }
@@ -62,7 +63,12 @@ clear
 
 function install_deps
 {
-REF="${LIST:-build}"
+REF="${1}"
+if [ -z "${REF}" ];then
+    alert "REF is a mandatory arg."
+    exit 1
+fi
+
 OPTIONS="--no-show-upgraded --no-upgrade --yes"
 STR="Installing Dependencies"
 subtitulo
@@ -71,7 +77,7 @@ subtitulo
 prefix="#"
 local STATUS=0
 
-FILE="RESOURCES/DEPS/dep_${REF}_debian_${VERSION_ID}.txt"
+FILE="./${REF}"
 if ! [ -f $FILE ];then
 	alert "The file ${FILE} was not found."
 	exit 1
@@ -107,6 +113,38 @@ else
 	exit 1
 fi
 
+}
+
+#############################################
+### Check Renaissance
+function check_renaissance
+{
+STR="Dependencies: Renaissance"
+titulo
+
+### Framework Renaissance
+LIBS=$(gnustep-config --variable=GNUSTEP_LOCAL_LIBRARIES)
+APPREN=GSMarkupBrowser
+
+STR="Checking Renaissance Framework"
+subtitulo
+
+openapp --find "${APPREN}"
+if [ $? -eq 0 ];then
+    info "${APPREN} was found.";sleep 1
+else
+    alert "Framework Renaissance must be installed first!"
+    sleep 4
+    exit 1
+fi
+
+if [ -f ${LIBS}/libRenaissance.so ];then
+    ok "Framework Renaissance was found.";sleep 2
+else
+    alert "Framework Renaissance must be installed first!"
+    sleep 4
+    exit 1
+fi
 }
 
 #############################################

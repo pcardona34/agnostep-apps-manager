@@ -15,7 +15,7 @@
 
 function _build()
 {
-DEBUG=${DEBUG:no}
+DEBUG=${DEBUG:-no}
 SYSTOOLS=$(gnustep-config --variable=GNUSTEP_SYSTEM_TOOLS)
 if [ -z "$SYSTOOLS" ];then
     alert "Your GNUstep System Path is misconfigured! Aborting."

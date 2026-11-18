@@ -13,10 +13,15 @@
 ### Functions of Main script: agnostep.sh
 ################################
 
+COUNT_CATEGORY=0
+COUNT_APP=0
+MENU=${MENU}
+APPMENU=${APPMENU}
+
 function main_menu_header
 {
-
-cat << DYNH > dynamic_menu.sh
+TARGET=$1
+cat << DYNH > $MENU
 function main_menu
 {
 dialog --backtitle "Agnostep Manager" --title "Categories" \\
@@ -29,14 +34,20 @@ function add_category
 {
 CATEGORY="$1"
 if [ -n "${CATEGORY}" ];then
-        echo -e "\"${CATEGORY}\" \"${CATEGORY} Apps\" off \\" >> ../dynamic_menu.sh
+    if [ $COUNT_CATEGORY -gt 0 ];then
+        CATEGORY_TAG="off"
+    else
+        CATEGORY_TAG="on"
+    fi
+    echo -e "\"${CATEGORY}\" \"${CATEGORY} Apps\" ${CATEGORY_TAG} \\" >>${MENU}
+    let COUNT_CATEGORY++
 fi
 }
 
 function main_menu_foot
 {
-cat << "DYNF" >> dynamic_menu.sh
-"Other" "Other apps" on 2>$FICHTEMP
+cat << "DYNF" >>${MENU}
+ 2>$FICHTEMP
 }
 DYNF
 
@@ -70,7 +81,7 @@ APP="$1"
 function app_menu_header
 {
 CATEGORY="$1"
-cat << DYNH > dynamic_app_menu.sh
+cat << DYNH >${APPMENU}
 function main_app_menu
 {
 dialog --backtitle "${CATEGORY}" --title "Applications" \\
@@ -83,13 +94,22 @@ function add_app_menu_item
 {
 APPNAME="$1"
 SHORT="$2"
-echo -e "\"${APPNAME}\" \"${SHORT}\" off \\" >> ../../dynamic_app_menu.sh
+
+if [ $COUNT_APP -gt 0 ];then
+    APP_TAG="off"
+else
+    APP_TAG="on"
+fi
+
+echo -e "\"${APPNAME}\" \"${SHORT}\" ${APP_TAG} \\" >>${APPMENU}
+let COUNT_APP++
 }
 
 function app_menu_foot
 {
-cat << "DYNF" >> dynamic_app_menu.sh
-"Other" "An Other app" on 2>$FICHTEMP
+
+cat << "DYNF" >>${APPMENU}
+ 2>$FICHTEMP
 }
 DYNF
 
