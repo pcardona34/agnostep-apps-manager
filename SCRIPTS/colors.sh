@@ -48,7 +48,7 @@ printf "\033[22;35m /!\ ${1} \033[0m \n\n"
 ### $1: message
 function info()
 {
-printf "\n === Info === \n"
+printf "\n --- Info --- \n"
 printf "(i) ${1} \n\n"
 }
 

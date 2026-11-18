@@ -19,6 +19,9 @@
 function sanity_check
 {
 
+. /etc/os-release
+. AGNOSTEP.conf
+
 STR="Checking your environment"
 subtitulo
 

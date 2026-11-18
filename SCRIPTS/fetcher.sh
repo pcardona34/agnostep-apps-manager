@@ -49,7 +49,7 @@ function clone
     if [ -d ${REPO} ];then
         pushd . >/dev/null
         cd ${REPO} && git pull
-        popd . >/dev/null
+        popd >/dev/null
     else
         git clone ${URL}.git
     fi

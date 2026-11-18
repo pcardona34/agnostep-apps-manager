@@ -15,7 +15,8 @@
 
 function _build()
 {
-DEBUG=${DEBUG:-no}
+. AGNOSTEP.conf
+DEBUG=${DEBUG:-NO}
 SYSTOOLS=$(gnustep-config --variable=GNUSTEP_SYSTEM_TOOLS)
 if [ -z "$SYSTOOLS" ];then
     alert "Your GNUstep System Path is misconfigured! Aborting."
@@ -29,7 +30,7 @@ fi
 
 if [ -f configure ];then
         printf "Configuring...\n"
-        if [ "$DEBUG" == "yes" ];then
+        if [ "$DEBUG" == "YES" ];then
             ./configure ${CONFIG_ARGS}
             printf "Building...\n"
         else
@@ -42,7 +43,7 @@ else
         printf "Building...\n"
 fi
 
-if [ "$DEBUG" == "yes" ];then
+if [ "$DEBUG" == "YES" ];then
     if [ -z "$DLOG" ];then
         make ${BUILD_ARGS} || exit 1
     else
@@ -56,7 +57,7 @@ else
 fi
 
 printf "\rInstalling...\n"
-if [ "$DEBUG" == "yes" ];then
+if [ "$DEBUG" == "YES" ];then
    sudo LD_LIBRARY_PATH="$LD_LIBRARY_PATH" PATH="$PATH" -E make messages=yes ${INSTALL_ARGS} install
     ok "Done"
 else

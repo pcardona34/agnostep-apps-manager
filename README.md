@@ -1,8 +1,6 @@
 # agnostep-apps-manager
 A wizard to fetch, build and install GNUstep applications on every computer powered by [agnostep-desktop](../../../agnostep-desktop).
 
-(Coming soon with AGNoStep 3rd release...)
-
 > [!CAUTION]
 > This repo is in early stage. Do NOT use before this note will be removed.
 
@@ -17,7 +15,7 @@ git clone --recursive https://github.com/pcardona34/agnostep-apps-manager
 
 ```console
 cd ~/SOURCES/agnostep-apps-manager
-git submodule update --init --recursive
+git submodule update --remote
 git pull
 ```
 
@@ -43,3 +41,7 @@ The all will be automated: fetching the source, building and installing.
 
 > ![NOTE]
 > The GNUstep AgnostepManager UI of the previous release is not yet available for the 3rd release of Agnostep. It will come soon. 
+
+## How to reset DEBUG status
+
+Edit `AGNOSTEP.conf` and change `DEBUG` value to `YES` or `NO`.

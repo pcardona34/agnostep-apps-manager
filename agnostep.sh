@@ -21,16 +21,27 @@ MENU=$(mktemp /tmp/agno-XXXXX)
 trap "rm -f $MENU" EXIT
 APPMENU=$(mktemp /tmp/agno-XXXXX)
 trap "rm -f $APPMENU" EXIT
+. AGNOSTEP.conf
+
+if [ "$DEBUG" == "YES" ];then
+    STOP=1
+else
+    STOP=0
+fi
 
 ### Include functions
 ################################
 
 . SCRIPTS/log.sh
 . SCRIPTS/colors.sh
+. SCRIPTS/stop.sh
+. SCRIPTS/spinner.sh
 . MODULES.ini
 . SCRIPTS/fetcher.sh
 . SCRIPTS/functions_prep.sh
 . SCRIPTS/functions_remove_app.sh
+. SCRIPTS/std_build.sh
+. SCRIPTS/check_app.sh
 . SCRIPTS/functions_main.sh
 
 ################################
@@ -43,15 +54,24 @@ titulo
 ### Logging
 ################################
 reset_log
-
+stop
 ################################
 ### Check env and system
-sanity_check
-
+sanity_check || exit 1
+stop
 
 ################################
 ### Building dynamic menu
 main_menu_header
+
+### Updating modules
+STR="Updating Modules"
+subtitulo
+
+git submodule update --remote
+ok "Done"
+sleep 2
+stop
 
 ### Listing enabled modules
 pushd . >/dev/null
@@ -69,6 +89,8 @@ done
 sleep 2
 popd >/dev/null
 main_menu_foot
+
+stop
 
 . $MENU || exit 1
 main_menu
@@ -106,9 +128,6 @@ if [ $? -eq 0 ];then
                 "fetch") fetch "$URL";;
             esac
             ok "Done"
-            printf "Cleanup...\n"
-            pushd . >/dev/null
-            remove_ifx_app "${APPNAME}"
             popd >/dev/null
 
             if [ -f install.sh ];then
@@ -119,8 +138,7 @@ if [ $? -eq 0 ];then
             popd >/dev/null
 
         else
-            warning "Installation aborted."
+            info "Installation aborted by User."
         fi
-        popd >/dev/null
     fi
 fi
