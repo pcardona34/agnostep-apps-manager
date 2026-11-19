@@ -55,5 +55,17 @@ function clone
     fi
 }
 
+### Svn Case
+function getSubversion
+{
+    if [ -d ${REPO} ];then
+        pushd . /dev/null
+        cd ${REPO} && svn update
+        popd >/dev/null
+    else
+        svn co ${SVN}
+    fi
+}
+
 ### Testing
 ### fetch http://download.savannah.nongnu.org/releases/gnustep-nonfsf/HighlighterKit-0.1.3.tar.gz

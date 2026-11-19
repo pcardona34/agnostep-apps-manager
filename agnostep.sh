@@ -124,7 +124,7 @@ if [ $? -eq 0 ];then
             printf "Fetching...\n"
             case "$FETCHER" in
                 "git") clone;;
-                "svn") echo "To be implemented";;
+                "svn") getSubversion;;
                 "fetch") fetch "$URL";;
             esac
             ok "Done"
