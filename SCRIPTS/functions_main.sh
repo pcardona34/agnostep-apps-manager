@@ -39,9 +39,20 @@ if [ -n "${CATEGORY}" ];then
     else
         CATEGORY_TAG="on"
     fi
-    echo -e "\"${CATEGORY}\" \"${CATEGORY} Apps\" ${CATEGORY_TAG} \\" >>${MENU}
+    DESC=$(get_category_info ${CATEGORY})
+    echo -e "\"${CATEGORY}\" \"${DESC}\" ${CATEGORY_TAG} \\" >>${MENU}
     let COUNT_CATEGORY++
 fi
+}
+
+function get_category_info
+{
+    DESC="unknown"
+    if [ -f ${CATEGORY}/MODULE.ini ];then
+        . ${CATEGORY}/MODULE.ini
+        DESC="$SHORT"
+    fi
+    echo "$DESC"
 }
 
 function main_menu_foot
