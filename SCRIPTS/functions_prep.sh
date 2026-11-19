@@ -171,7 +171,29 @@ else
 fi
 }
 
+#############################################
+### Check Addresses Framework
+#############################################
+### Checking HLKit
+#############################################
+function check_addresses
+{
+STR="Dependencies: Addresses Framework"
+titulo
 
+### Framework Addresses
+LIBS=$(gnustep-config --variable=GNUSTEP_LOCAL_LIBRARIES)
+for KIT in Addresses AddressView
+do
+if [ -f ${LIBS}/lib${KIT}.so ];then
+    ok "Framework ${KIT} was found.";sleep 2
+else
+    alert "Framework {KIT} must be installed first!"
+    sleep 4
+    exit 1
+fi
+done
+}
 
 #############################################
 ### SPEC Raspberry Pi

@@ -4,3 +4,6 @@
 [submodule "MODULES/gnustep-devel-apps"]
 	path = MODULES/gnustep-devel-apps
 	url = https://github.com/pcardona34/gnustep-devel-apps.git
+[submodule "MODULES/gnustep-recommended-apps"]
+	path = MODULES/gnustep-recommended-apps
+	url = https://github.com/pcardona34/gnustep-recommended-apps.git
