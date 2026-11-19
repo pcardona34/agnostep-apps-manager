@@ -151,6 +151,29 @@ fi
 }
 
 #############################################
+### Checking HLKit
+#############################################
+function check_hlkit
+{
+STR="Dependencies: HLKit Framework"
+titulo
+
+### Framework HLKit
+LIBS=$(gnustep-config --variable=GNUSTEP_LOCAL_LIBRARIES)
+HLKIT=${LIBS}/libHighlighterKit.so
+
+if [ -f ${HLKIT} ];then
+    ok "Framework HLKit was found.";sleep 2
+else
+    alert "Framework HighlighterKit must be installed first!"
+    sleep 4
+    exit 1
+fi
+}
+
+
+
+#############################################
 ### SPEC Raspberry Pi
 ### Is the current hardware a Raspberry Pi
 ### If yes, it has a specific Device Tree

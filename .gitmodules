@@ -1,3 +1,6 @@
 [submodule "MODULES/agnostep-applications"]
 	path = MODULES/agnostep-applications
 	url = https://github.com/pcardona34/agnostep-applications
+[submodule "MODULES/gnustep-devel-apps"]
+	path = MODULES/gnustep-devel-apps
+	url = https://github.com/pcardona34/gnustep-devel-apps.git
