@@ -114,6 +114,10 @@ if [ $? -eq 0 ];then
         dialog --backtitle "${APPNAME}" --title "Installation" \
             --yesno "Do you confirm the installation of ${APPNAME}?" 12 60
         if [ $? -eq 0 ];then
+            if [ "${APPNAME}" == "Template" ];then
+                alert "This is not a true App. Abandon."
+                exit 1
+            fi
             echo "Installation will start soon..."
             pushd . >/dev/null
             if [ ! -d build ];then

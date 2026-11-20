@@ -25,7 +25,7 @@ cat << DYNH > $MENU
 function main_menu
 {
 dialog --backtitle "Agnostep Manager" --title "Categories" \\
- --radiolist "Choose a category" 12 60 6 \\
+ --radiolist "Choose a category" 12 70 6 \\
 DYNH
 
 }
@@ -96,7 +96,7 @@ cat << DYNH >${APPMENU}
 function main_app_menu
 {
 dialog --backtitle "${CATEGORY}" --title "Applications" \\
- --radiolist "Choose an application" 12 60 10 \\
+ --radiolist "Choose an application" 12 70 10 \\
 DYNH
 
 }
