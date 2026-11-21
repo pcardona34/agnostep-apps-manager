@@ -196,6 +196,28 @@ done
 }
 
 #############################################
+### Checking RSSKit
+#############################################
+function check_rsskit
+{
+STR="Dependencies: RSSKit Framework"
+titulo
+
+### Framework RSSKit
+LIBS=$(gnustep-config --variable=GNUSTEP_LOCAL_LIBRARIES)
+RSSKIT=${LIBS}/libRSSKit.so
+
+if [ -f ${RSSKIT} ];then
+    ok "Framework RSSKit was found.";sleep 2
+else
+    alert "Framework RSSKit must be installed first!"
+    sleep 4
+    exit 1
+fi
+}
+
+
+#############################################
 ### SPEC Raspberry Pi
 ### Is the current hardware a Raspberry Pi
 ### If yes, it has a specific Device Tree
