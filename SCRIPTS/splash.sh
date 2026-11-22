@@ -1,11 +1,16 @@
 #!/bin/bash
 
-LOGO=RESOURCES/LOGOS/LOGO_ASCII.txt
-clear
+if [ -n "$SPLASH" ] && [ "$SPLASH" == "NO" ];then
+    echo "Splash is disabled."
+else
+    LOGO=RESOURCES/LOGOS/LOGO_ASCII.txt
+    clear
 
-echo -e "\n\tPowered by\n\n"
-cat ${LOGO}
-printf "\033[22;33m \n\n\tThe Free GNUstep\n\t\tAgnostic Desktop\n\t\t\tfor All\n \033[0m \n\n"
+    echo -e "\n\tPowered by\n\n"
+    cat ${LOGO}
+    printf "\033[22;33m \n\n\tThe Free GNUstep\n\t\tAgnostic Desktop\n\t\t\tfor All\n \033[0m \n\n"
 
-sleep 5
-clear
+    sleep 4
+    clear
+fi
+

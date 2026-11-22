@@ -216,6 +216,27 @@ else
 fi
 }
 
+#############################################
+### Checking System and Desktop Kits
+#############################################
+function check_system_and_desktop_kits
+{
+STR="Dependencies: System and Desktop Kits Frameworks"
+titulo
+
+### Frameworks
+LIBS=$(gnustep-config --variable=GNUSTEP_LOCAL_LIBRARIES)
+for KIT in System Desktop
+do
+	if [ -f ${LIBS}/lib${KIT}Kit.so ];then
+        ok "Framework ${KIT}Kit was found.";sleep 2
+    else
+        alert "Framework ${KIT}Kit must be installed first!"
+        sleep 4
+        exit 1
+    fi
+done
+}
 
 #############################################
 ### SPEC Raspberry Pi

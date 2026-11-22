@@ -45,3 +45,20 @@ The all will be automated: fetching the source, building and installing.
 ## How to reset DEBUG status
 
 Edit `AGNOSTEP.conf` and change `DEBUG` value to `YES` or `NO`.
+
+## How to avoid Splash screen
+
+Execute:
+
+```console
+export SPLASH=NO && bash ./agnostep.sh
+```
+
+## How to test and submit a new application
+
+1. Duplicate `Template` folder in `MODULES/test`
+2. Name this copy with you Appname.
+3. Edit `APPINFO.ini`, `DEPS.ini` and `install.sh`. If needed, create `dep_yourapp_debian_13.txt`.
+4. Run Agnostep Apps Manager and choose `test` category, then your app...
+
+When you are satisfied, remove the `build` folder and copy this new App folder to its category target (NOT  in `agnostep-apps-manager`, but in the target module fork, outside this repo) and submit a PR.
