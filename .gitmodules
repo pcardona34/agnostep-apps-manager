@@ -7,3 +7,6 @@
 [submodule "MODULES/gnustep-recommended-apps"]
 	path = MODULES/gnustep-recommended-apps
 	url = https://github.com/pcardona34/gnustep-recommended-apps.git
+[submodule "MODULES/gnustep-utilities"]
+	path = MODULES/gnustep-utilities
+	url = https://github.com/pcardona34/gnustep-utilities
