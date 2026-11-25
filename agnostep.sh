@@ -42,6 +42,7 @@ fi
 . SCRIPTS/functions_remove_app.sh
 . SCRIPTS/std_build.sh
 . SCRIPTS/check_app.sh
+. SCRIPTS/patch_with_quilt.sh
 . SCRIPTS/functions_main.sh
 
 ################################
