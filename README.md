@@ -21,7 +21,7 @@ git pull
 
 ## Using
 
-To install a GNUstep application:
+To install a GNUstep application, run Agnostep Manager:
 
 ```
 cd ~/SOURCES/agnostep-apps-manager
@@ -40,7 +40,7 @@ The all will be automated: fetching the source, building and installing.
 > To perform an installation, you will need to become a superuser: `sudo` will ask your password.
 
 > ![NOTE]
-> The GNUstep AgnostepManager UI of the previous release is not yet available for the 3rd release of Agnostep. It will come soon. 
+> The GNUstep [AgnostepManager](../../../AgnostepManager) UI is available now for the 3rd release of Agnostep. Install it from 'agnostep-applications' category.
 
 ## How to reset DEBUG status
 
